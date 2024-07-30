@@ -2,7 +2,9 @@ package toolsmock_test
 
 import (
 	"fmt"
+	"io"
 	"net/http"
+	"strings"
 	"testing"
 
 	"github.com/nextunit-io/go-tools/toolsmock"
@@ -59,13 +61,13 @@ func TestHttpMockPut(t *testing.T) {
 		httpMock.Mock.Put.AddReturnValue(&output)
 
 		for i := 0; i < 3; i++ {
-			o, err := httpMock.Put(fmt.Sprintf("test-input-%d", i))
+			o, err := httpMock.Put(fmt.Sprintf("test-input-%d", i), fmt.Sprintf("test-content-type-%d", i), strings.NewReader(fmt.Sprintf("test-body-%d", i)))
 
 			assert.Nil(t, err)
 			assert.Equal(t, output, *o)
 		}
 
-		o, err := httpMock.Put("test-input-error")
+		o, err := httpMock.Put("test-input-error", "test-content-type-error", strings.NewReader("test-body-error"))
 
 		assert.Nil(t, o)
 		assert.Equal(t, fmt.Errorf("PUT general error"), err)
@@ -74,12 +76,23 @@ func TestHttpMockPut(t *testing.T) {
 		for i := 0; i < 3; i++ {
 			input := httpMock.Mock.Put.GetInput(i)
 			assert.Equal(t, fmt.Sprintf("test-input-%d", i), input.Url)
+			assert.Equal(t, fmt.Sprintf("test-content-type-%d", i), input.ContentType)
+
+			b, err := io.ReadAll(input.Body)
+			assert.Nil(t, err)
+			assert.Equal(t, fmt.Sprintf("test-body-%d", i), string(b))
 		}
 
 		input := httpMock.Mock.Put.GetInput(3)
 		assert.Equal(t, "test-input-error", input.Url)
+		assert.Equal(t, "test-content-type-error", input.ContentType)
+
+		b, err := io.ReadAll(input.Body)
+		assert.Nil(t, err)
+		assert.Equal(t, "test-body-error", string(b))
 	})
 }
+
 func TestHttpMockPost(t *testing.T) {
 	t.Helper()
 	httpMock := toolsmock.GetHttpMock()
@@ -94,13 +107,13 @@ func TestHttpMockPost(t *testing.T) {
 		httpMock.Mock.Post.AddReturnValue(&output)
 
 		for i := 0; i < 3; i++ {
-			o, err := httpMock.Post(fmt.Sprintf("test-input-%d", i))
+			o, err := httpMock.Post(fmt.Sprintf("test-input-%d", i), fmt.Sprintf("test-content-type-%d", i), strings.NewReader(fmt.Sprintf("test-body-%d", i)))
 
 			assert.Nil(t, err)
 			assert.Equal(t, output, *o)
 		}
 
-		o, err := httpMock.Post("test-input-error")
+		o, err := httpMock.Post("test-input-error", "test-content-type-error", strings.NewReader("test-body-error"))
 
 		assert.Nil(t, o)
 		assert.Equal(t, fmt.Errorf("POST general error"), err)
@@ -109,10 +122,20 @@ func TestHttpMockPost(t *testing.T) {
 		for i := 0; i < 3; i++ {
 			input := httpMock.Mock.Post.GetInput(i)
 			assert.Equal(t, fmt.Sprintf("test-input-%d", i), input.Url)
+			assert.Equal(t, fmt.Sprintf("test-content-type-%d", i), input.ContentType)
+
+			b, err := io.ReadAll(input.Body)
+			assert.Nil(t, err)
+			assert.Equal(t, fmt.Sprintf("test-body-%d", i), string(b))
 		}
 
 		input := httpMock.Mock.Post.GetInput(3)
 		assert.Equal(t, "test-input-error", input.Url)
+		assert.Equal(t, "test-content-type-error", input.ContentType)
+
+		b, err := io.ReadAll(input.Body)
+		assert.Nil(t, err)
+		assert.Equal(t, "test-body-error", string(b))
 	})
 }
 

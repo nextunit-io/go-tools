@@ -2,6 +2,7 @@ package toolsmock
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 
 	gomock "github.com/nextunit-io/go-mock"
@@ -19,12 +20,16 @@ type httpMockStruct struct {
 		http.Response,
 	]
 	Post *gomock.ToolMock[struct {
-		Url string
+		Url         string
+		ContentType string
+		Body        io.Reader
 	},
 		http.Response,
 	]
 	Put *gomock.ToolMock[struct {
-		Url string
+		Url         string
+		ContentType string
+		Body        io.Reader
 	},
 		http.Response,
 	]
@@ -43,12 +48,16 @@ func GetHttpMock() *httpMock {
 				http.Response,
 			](fmt.Errorf("GET general error")),
 			Put: gomock.GetMock[struct {
-				Url string
+				Url         string
+				ContentType string
+				Body        io.Reader
 			},
 				http.Response,
 			](fmt.Errorf("PUT general error")),
 			Post: gomock.GetMock[struct {
-				Url string
+				Url         string
+				ContentType string
+				Body        io.Reader
 			},
 				http.Response,
 			](fmt.Errorf("POST general error")),
@@ -73,24 +82,32 @@ func (h *httpMock) Get(url string) (resp *http.Response, err error) {
 	return h.Mock.Get.GetNextResult()
 }
 
-func (h *httpMock) Put(url string) (resp *http.Response, err error) {
+func (h *httpMock) Put(url, contentType string, body io.Reader) (resp *http.Response, err error) {
 	h.Mock.Put.AddInput(
 		struct {
-			Url string
+			Url         string
+			ContentType string
+			Body        io.Reader
 		}{
-			Url: url,
+			Url:         url,
+			ContentType: contentType,
+			Body:        body,
 		},
 	)
 
 	return h.Mock.Put.GetNextResult()
 }
 
-func (h *httpMock) Post(url string) (resp *http.Response, err error) {
+func (h *httpMock) Post(url, contentType string, body io.Reader) (resp *http.Response, err error) {
 	h.Mock.Post.AddInput(
 		struct {
-			Url string
+			Url         string
+			ContentType string
+			Body        io.Reader
 		}{
-			Url: url,
+			Url:         url,
+			ContentType: contentType,
+			Body:        body,
 		},
 	)
 
