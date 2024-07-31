@@ -5,7 +5,7 @@ go 1.22.0
 require (
 	github.com/aws/aws-sdk-go-v2 v1.30.3
 	github.com/aws/aws-sdk-go-v2/config v1.27.27
-	github.com/nextunit-io/go-tools/toolsmock v0.0.0-20240730150601-b20713ceedb0
+	github.com/nextunit-io/go-tools/toolsmock v0.0.0-20240731050459-c45457d628c3
 	github.com/stretchr/testify v1.9.0
 )
 
@@ -22,7 +22,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.30.3 // indirect
 	github.com/aws/smithy-go v1.20.3 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/nextunit-io/go-mock v0.0.0-20240730143511-1fd4c363446a // indirect
+	github.com/nextunit-io/go-mock v0.0.0-20240731050352-a1c9576fe371 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
