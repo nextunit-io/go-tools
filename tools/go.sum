@@ -30,10 +30,14 @@ github.com/nextunit-io/go-mock v0.0.0-20240730143511-1fd4c363446a h1:UKzg1U+oAYQ
 github.com/nextunit-io/go-mock v0.0.0-20240730143511-1fd4c363446a/go.mod h1:kecyE7VJ/Cou30y3bWP0trAEXYJ+5hUun/5/2NUue0E=
 github.com/nextunit-io/go-mock v0.0.0-20240731050352-a1c9576fe371 h1:WdTbSEtjeHyGLJ51akBkloeWRQWhWsCMzOjwGJNINH0=
 github.com/nextunit-io/go-mock v0.0.0-20240731050352-a1c9576fe371/go.mod h1:kecyE7VJ/Cou30y3bWP0trAEXYJ+5hUun/5/2NUue0E=
+github.com/nextunit-io/go-mock v0.0.0-20240731051644-97d255a9a00e h1:RZqfMCM/VsDUwty/GShYVWLp1kWpBUki/WPfF6Y2z9o=
+github.com/nextunit-io/go-mock v0.0.0-20240731051644-97d255a9a00e/go.mod h1:kecyE7VJ/Cou30y3bWP0trAEXYJ+5hUun/5/2NUue0E=
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20240730150601-b20713ceedb0 h1:hRHYIrLs/pV4Y9P8u0SM+OydecNWyyScNheS7y1yLAc=
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20240730150601-b20713ceedb0/go.mod h1:mleoCqW76stuTV+ePuVbKBJPkU06hGdYlALch5h8hoo=
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20240731050459-c45457d628c3 h1:OWQ+Ve1TMOUAfr28dVOqqgXllF7yyc+IjdsLIcpMajw=
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20240731050459-c45457d628c3/go.mod h1:InUNRI+969spOQWAgjrjhFu9hh5+o5fOcOZlJuWN5Is=
+github.com/nextunit-io/go-tools/toolsmock v0.0.0-20240731051810-d566c0218629 h1:Nt5zZz89c474MNvXyM/zVCa/ziLymkwhLk71TfwqBE4=
+github.com/nextunit-io/go-tools/toolsmock v0.0.0-20240731051810-d566c0218629/go.mod h1:daiJ9B6GRpD/Djkod2gZmJzHdfzoYrqIB3+rz8XRqO8=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsTg=
