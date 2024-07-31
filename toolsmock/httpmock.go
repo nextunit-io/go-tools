@@ -35,12 +35,12 @@ type httpMockStruct struct {
 	]
 }
 
-type httpMock struct {
+type HttpMock struct {
 	Mock httpMockStruct
 }
 
-func GetHttpMock() *httpMock {
-	return &httpMock{
+func GetHttpMock() *HttpMock {
+	return &HttpMock{
 		Mock: httpMockStruct{
 			Get: gomock.GetMock[struct {
 				Url string
@@ -70,7 +70,7 @@ func GetHttpMock() *httpMock {
 	}
 }
 
-func (h *httpMock) Get(url string) (resp *http.Response, err error) {
+func (h *HttpMock) Get(url string) (resp *http.Response, err error) {
 	h.Mock.Get.AddInput(
 		struct {
 			Url string
@@ -82,7 +82,7 @@ func (h *httpMock) Get(url string) (resp *http.Response, err error) {
 	return h.Mock.Get.GetNextResult()
 }
 
-func (h *httpMock) Put(url, contentType string, body io.Reader) (resp *http.Response, err error) {
+func (h *HttpMock) Put(url, contentType string, body io.Reader) (resp *http.Response, err error) {
 	h.Mock.Put.AddInput(
 		struct {
 			Url         string
@@ -98,7 +98,7 @@ func (h *httpMock) Put(url, contentType string, body io.Reader) (resp *http.Resp
 	return h.Mock.Put.GetNextResult()
 }
 
-func (h *httpMock) Post(url, contentType string, body io.Reader) (resp *http.Response, err error) {
+func (h *HttpMock) Post(url, contentType string, body io.Reader) (resp *http.Response, err error) {
 	h.Mock.Post.AddInput(
 		struct {
 			Url         string
@@ -114,7 +114,7 @@ func (h *httpMock) Post(url, contentType string, body io.Reader) (resp *http.Res
 	return h.Mock.Post.GetNextResult()
 }
 
-func (h *httpMock) Delete(url string) (resp *http.Response, err error) {
+func (h *HttpMock) Delete(url string) (resp *http.Response, err error) {
 	h.Mock.Delete.AddInput(
 		struct {
 			Url string

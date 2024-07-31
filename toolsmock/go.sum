@@ -2,6 +2,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/nextunit-io/go-mock v0.0.0-20240730143511-1fd4c363446a h1:UKzg1U+oAYQkDm4P6izN4WI5AdsTXM8BuvYasGBwq+Q=
 github.com/nextunit-io/go-mock v0.0.0-20240730143511-1fd4c363446a/go.mod h1:kecyE7VJ/Cou30y3bWP0trAEXYJ+5hUun/5/2NUue0E=
+github.com/nextunit-io/go-mock v0.0.0-20240731050352-a1c9576fe371 h1:WdTbSEtjeHyGLJ51akBkloeWRQWhWsCMzOjwGJNINH0=
+github.com/nextunit-io/go-mock v0.0.0-20240731050352-a1c9576fe371/go.mod h1:kecyE7VJ/Cou30y3bWP0trAEXYJ+5hUun/5/2NUue0E=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsTg=

@@ -14,12 +14,12 @@ type timeMockStruct struct {
 	]
 }
 
-type timeMock struct {
+type TimeMock struct {
 	Mock timeMockStruct
 }
 
-func GetTimeMock() *timeMock {
-	return &timeMock{
+func GetTimeMock() *TimeMock {
+	return &TimeMock{
 		Mock: timeMockStruct{
 			Now: gomock.GetMock[
 				interface{},
@@ -29,7 +29,7 @@ func GetTimeMock() *timeMock {
 	}
 }
 
-func (t *timeMock) Now() time.Time {
+func (t *TimeMock) Now() time.Time {
 	t.Mock.Now.AddInput(nil)
 
 	result, err := t.Mock.Now.GetNextResult()

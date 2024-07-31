@@ -3,7 +3,7 @@ module github.com/nextunit-io/go-tools/toolsmock
 go 1.22.0
 
 require (
-	github.com/nextunit-io/go-mock v0.0.0-20240730143511-1fd4c363446a
+	github.com/nextunit-io/go-mock v0.0.0-20240731050352-a1c9576fe371
 	github.com/stretchr/testify v1.9.0
 )
 

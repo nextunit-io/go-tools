@@ -14,12 +14,12 @@ type envMockStruct struct {
 	]
 }
 
-type envMock struct {
+type EnvMock struct {
 	Mock envMockStruct
 }
 
-func GetEnvMock() *envMock {
-	return &envMock{
+func GetEnvMock() *EnvMock {
+	return &EnvMock{
 		Mock: envMockStruct{
 			Getenv: gomock.GetMock[struct {
 				Key string
@@ -30,7 +30,7 @@ func GetEnvMock() *envMock {
 	}
 }
 
-func (e *envMock) Getenv(key string) string {
+func (e *EnvMock) Getenv(key string) string {
 	e.Mock.Getenv.AddInput(
 		struct {
 			Key string
