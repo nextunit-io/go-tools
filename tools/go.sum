@@ -72,6 +72,8 @@ github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241204193000-38dcaf34f120 h1:
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241204193000-38dcaf34f120/go.mod h1:gQ5Hdn4oFYbXZ85k2QMgYZGHJ8WozwHVVxssvQu82iI=
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241206183256-b188abe71e51 h1:mWjZoZXp3qUBW+CiuUSWGjxQZzEk0CZ8YqKD8VumitQ=
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241206183256-b188abe71e51/go.mod h1:gQ5Hdn4oFYbXZ85k2QMgYZGHJ8WozwHVVxssvQu82iI=
+github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241207211650-5a9f81c77971 h1:jf41QtHNOwvUb/g5kBUq2Ut6mmrNOBadPeArnCkZ9fQ=
+github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241207211650-5a9f81c77971/go.mod h1:gQ5Hdn4oFYbXZ85k2QMgYZGHJ8WozwHVVxssvQu82iI=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsTg=

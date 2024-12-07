@@ -11,6 +11,8 @@ type OsInterface interface {
 	ReadFile(name string) ([]byte, error)
 	Remove(name string) error
 	RemoveAll(path string) error
+	Stat(name string) (os.FileInfo, error)
+	TempDir() string
 }
 
 type defaultOsClient struct {
@@ -49,4 +51,11 @@ func (defaultOsClient) Remove(name string) error {
 }
 func (defaultOsClient) RemoveAll(path string) error {
 	return os.RemoveAll(path)
+}
+func (defaultOsClient) Stat(name string) (os.FileInfo, error) {
+	return os.Stat(name)
+}
+
+func (defaultOsClient) TempDir() string {
+	return os.TempDir()
 }
