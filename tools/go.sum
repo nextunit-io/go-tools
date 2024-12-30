@@ -60,6 +60,10 @@ github.com/nextunit-io/go-mock v0.0.0-20240731051644-97d255a9a00e h1:RZqfMCM/VsD
 github.com/nextunit-io/go-mock v0.0.0-20240731051644-97d255a9a00e/go.mod h1:kecyE7VJ/Cou30y3bWP0trAEXYJ+5hUun/5/2NUue0E=
 github.com/nextunit-io/go-mock v0.0.0-20240911152234-c0b0103a4eca h1:ePf7TQDoy4XvByRK1btYMCmXNEdN+WMZufJrRB5vkbg=
 github.com/nextunit-io/go-mock v0.0.0-20240911152234-c0b0103a4eca/go.mod h1:kecyE7VJ/Cou30y3bWP0trAEXYJ+5hUun/5/2NUue0E=
+github.com/nextunit-io/go-tools/interfaces v0.0.0-20241230144513-b630161546af h1:GFk5dNx0NyXon2aXPOMIgWqfMRAc/zfnQz8pvaAJVKE=
+github.com/nextunit-io/go-tools/interfaces v0.0.0-20241230144513-b630161546af/go.mod h1:2ZzCgcNfhCYB6inZ/P7iDk2GVkwk/AZ5kpEZyPHwDvI=
+github.com/nextunit-io/go-tools/interfaces v0.0.0-20241230144828-fdb97a740fbf h1:rxRjloJtu2wX25mP9yFqC+7iL4+DfOPsZNtCm7LITuQ=
+github.com/nextunit-io/go-tools/interfaces v0.0.0-20241230144828-fdb97a740fbf/go.mod h1:2ZzCgcNfhCYB6inZ/P7iDk2GVkwk/AZ5kpEZyPHwDvI=
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20240730150601-b20713ceedb0 h1:hRHYIrLs/pV4Y9P8u0SM+OydecNWyyScNheS7y1yLAc=
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20240730150601-b20713ceedb0/go.mod h1:mleoCqW76stuTV+ePuVbKBJPkU06hGdYlALch5h8hoo=
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20240731050459-c45457d628c3 h1:OWQ+Ve1TMOUAfr28dVOqqgXllF7yyc+IjdsLIcpMajw=
@@ -84,6 +88,8 @@ github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241230125658-95ca3130a9de h1:
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241230125658-95ca3130a9de/go.mod h1:gQ5Hdn4oFYbXZ85k2QMgYZGHJ8WozwHVVxssvQu82iI=
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241230142937-c03a374b4bce h1:Ry9XNPtuOI9IYzTb5e01tZmxUc8YzyvguxjX02xRn9Q=
 github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241230142937-c03a374b4bce/go.mod h1:gQ5Hdn4oFYbXZ85k2QMgYZGHJ8WozwHVVxssvQu82iI=
+github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241230144828-fdb97a740fbf h1:/aJe13aJgTqJXTCMz1nsNbFaKyHKwNw1Orw1mGtqazo=
+github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241230144828-fdb97a740fbf/go.mod h1:uTDcUxtPQoZgKqmNuSUPELGMz25wC/q+lf3GMraNYJA=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsTg=

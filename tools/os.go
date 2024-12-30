@@ -2,14 +2,16 @@ package tools
 
 import (
 	"os"
+
+	"github.com/nextunit-io/go-tools/interfaces"
 )
 
 type OsInterface interface {
 	MkdirAll(path string, perm os.FileMode) error
 	MkdirTemp(dir, pattern string) (string, error)
 	Mkdir(name string, perm os.FileMode) error
-	Open(name string) (*os.File, error)
-	OpenFile(name string, flag int, perm os.FileMode) (*os.File, error)
+	Open(name string) (interfaces.OsFileInterface, error)
+	OpenFile(name string, flag int, perm os.FileMode) (interfaces.OsFileInterface, error)
 	ReadFile(name string) ([]byte, error)
 	Remove(name string) error
 	RemoveAll(path string) error
@@ -46,10 +48,10 @@ func (defaultOsClient) MkdirTemp(dir, pattern string) (string, error) {
 func (defaultOsClient) Mkdir(name string, perm os.FileMode) error {
 	return os.Mkdir(name, perm)
 }
-func (defaultOsClient) Open(name string) (*os.File, error) {
+func (defaultOsClient) Open(name string) (interfaces.OsFileInterface, error) {
 	return os.Open(name)
 }
-func (defaultOsClient) OpenFile(name string, flag int, perm os.FileMode) (*os.File, error) {
+func (defaultOsClient) OpenFile(name string, flag int, perm os.FileMode) (interfaces.OsFileInterface, error) {
 	return os.OpenFile(name, flag, perm)
 }
 func (defaultOsClient) ReadFile(name string) ([]byte, error) {
