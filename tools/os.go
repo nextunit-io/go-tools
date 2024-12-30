@@ -13,6 +13,7 @@ type OsInterface interface {
 	RemoveAll(path string) error
 	Stat(name string) (os.FileInfo, error)
 	TempDir() string
+	UserHomeDir() (string, error)
 }
 
 type defaultOsClient struct {
@@ -58,4 +59,8 @@ func (defaultOsClient) Stat(name string) (os.FileInfo, error) {
 
 func (defaultOsClient) TempDir() string {
 	return os.TempDir()
+}
+
+func (defaultOsClient) UserHomeDir() (string, error) {
+	return os.UserHomeDir()
 }
