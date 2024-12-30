@@ -7,6 +7,7 @@ import (
 )
 
 type OsInterface interface {
+	Create(name string) (interfaces.OsFileInterface, error)
 	MkdirAll(path string, perm os.FileMode) error
 	MkdirTemp(dir, pattern string) (string, error)
 	Mkdir(name string, perm os.FileMode) error
@@ -38,10 +39,12 @@ func SetOsInstance(client OsInterface) {
 	osInstane = client
 }
 
+func (defaultOsClient) Create(name string) (interfaces.OsFileInterface, error) {
+	return os.Create(name)
+}
 func (defaultOsClient) MkdirAll(path string, perm os.FileMode) error {
 	return os.MkdirAll(path, perm)
 }
-
 func (defaultOsClient) MkdirTemp(dir, pattern string) (string, error) {
 	return os.MkdirTemp(dir, pattern)
 }
