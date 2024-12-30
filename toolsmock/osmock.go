@@ -262,15 +262,15 @@ func (osMock *OsMock) TempDir() string {
 	return *result
 }
 
-func (osMock *OsMock) UserHomeDir() string {
+func (osMock *OsMock) UserHomeDir() (string, error) {
 	osMock.Mock.UserHomeDir.AddInput(nil)
 
 	result, err := osMock.Mock.UserHomeDir.GetNextResult()
 	if err != nil {
-		panic(err.Error())
+		return "", err
 	}
 
-	return *result
+	return *result, nil
 }
 
 type fileInfoMockStruct struct {

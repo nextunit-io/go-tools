@@ -280,22 +280,18 @@ func TestOsMockUserHomeDir(t *testing.T) {
 		osMock.Mock.UserHomeDir.AddReturnValue(&tmpDir)
 
 		for i := 0; i < 3; i++ {
-			dir := osMock.UserHomeDir()
+			dir, err := osMock.UserHomeDir()
+			assert.Nil(t, err)
 			assert.Equal(t, tmpDir, dir)
 		}
 
 		assert.Equal(t, 3, osMock.Mock.UserHomeDir.HasBeenCalled())
 
-		osMock.Mock.UserHomeDir.Reset()
-		defer func() {
-			if r := recover(); r == nil {
-				t.Errorf("The code did not panic")
-			}
+		dir, err := osMock.UserHomeDir()
+		assert.Equal(t, "", dir)
+		assert.Equal(t, fmt.Errorf("UserHomeDir general error"), err)
 
-			assert.Equal(t, 1, osMock.Mock.UserHomeDir.HasBeenCalled())
-		}()
-
-		_ = osMock.UserHomeDir()
+		assert.Equal(t, 4, osMock.Mock.UserHomeDir.HasBeenCalled())
 	})
 }
 
