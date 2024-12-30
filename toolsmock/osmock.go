@@ -70,6 +70,12 @@ type osMockStruct struct {
 		interface{},
 		string,
 	]
+	Open *gomock.ToolMock[
+		struct {
+			Name string
+		},
+		*os.File,
+	]
 }
 
 type OsMock struct {
@@ -100,6 +106,12 @@ func GetOsMock() *OsMock {
 				},
 				bool,
 			](fmt.Errorf("Mkdir general error")),
+			Open: gomock.GetMock[
+				struct {
+					Name string
+				},
+				*os.File,
+			](fmt.Errorf("Open general error")),
 			OpenFile: gomock.GetMock[
 				struct {
 					Name string
@@ -303,6 +315,21 @@ func (osMock *OsMock) UserHomeDir() (string, error) {
 	result, err := osMock.Mock.UserHomeDir.GetNextResult()
 	if err != nil {
 		return "", err
+	}
+
+	return *result, nil
+}
+
+func (osMock *OsMock) Open(name string) (*os.File, error) {
+	osMock.Mock.Open.AddInput(struct {
+		Name string
+	}{
+		Name: name,
+	})
+
+	result, err := osMock.Mock.Open.GetNextResult()
+	if err != nil {
+		return nil, err
 	}
 
 	return *result, nil
