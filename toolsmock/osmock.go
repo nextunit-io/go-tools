@@ -58,6 +58,10 @@ type osMockStruct struct {
 		interface{},
 		string,
 	]
+	UserHomeDir *gomock.ToolMock[
+		interface{},
+		string,
+	]
 }
 
 type OsMock struct {
@@ -116,6 +120,10 @@ func GetOsMock() *OsMock {
 				interface{},
 				string,
 			](fmt.Errorf("TempDir general error")),
+			UserHomeDir: gomock.GetMock[
+				interface{},
+				string,
+			](fmt.Errorf("UserHomeDir general error")),
 		},
 	}
 }
@@ -247,6 +255,17 @@ func (osMock *OsMock) TempDir() string {
 	osMock.Mock.TempDir.AddInput(nil)
 
 	result, err := osMock.Mock.TempDir.GetNextResult()
+	if err != nil {
+		panic(err.Error())
+	}
+
+	return *result
+}
+
+func (osMock *OsMock) UserHomeDir() string {
+	osMock.Mock.UserHomeDir.AddInput(nil)
+
+	result, err := osMock.Mock.UserHomeDir.GetNextResult()
 	if err != nil {
 		panic(err.Error())
 	}

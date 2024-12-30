@@ -269,6 +269,36 @@ func TestOsMockTempDir(t *testing.T) {
 	})
 }
 
+func TestOsMockUserHomeDir(t *testing.T) {
+	t.Helper()
+	osMock := toolsmock.GetOsMock()
+
+	t.Run("Testing UserHomeDir", func(t *testing.T) {
+		tmpDir := "test-tmpdir"
+		osMock.Mock.UserHomeDir.AddReturnValue(&tmpDir)
+		osMock.Mock.UserHomeDir.AddReturnValue(&tmpDir)
+		osMock.Mock.UserHomeDir.AddReturnValue(&tmpDir)
+
+		for i := 0; i < 3; i++ {
+			dir := osMock.UserHomeDir()
+			assert.Equal(t, tmpDir, dir)
+		}
+
+		assert.Equal(t, 3, osMock.Mock.UserHomeDir.HasBeenCalled())
+
+		osMock.Mock.UserHomeDir.Reset()
+		defer func() {
+			if r := recover(); r == nil {
+				t.Errorf("The code did not panic")
+			}
+
+			assert.Equal(t, 1, osMock.Mock.UserHomeDir.HasBeenCalled())
+		}()
+
+		_ = osMock.UserHomeDir()
+	})
+}
+
 func TestFileInfoMockName(t *testing.T) {
 	t.Helper()
 	fsInfoMock := toolsmock.GetFileInfoMock()
