@@ -8,6 +8,7 @@ type OsInterface interface {
 	MkdirAll(path string, perm os.FileMode) error
 	MkdirTemp(dir, pattern string) (string, error)
 	Mkdir(name string, perm os.FileMode) error
+	OpenFile(name string, flag int, perm os.FileMode) (*os.File, error)
 	ReadFile(name string) ([]byte, error)
 	Remove(name string) error
 	RemoveAll(path string) error
@@ -44,6 +45,9 @@ func (defaultOsClient) MkdirTemp(dir, pattern string) (string, error) {
 func (defaultOsClient) Mkdir(name string, perm os.FileMode) error {
 	return os.Mkdir(name, perm)
 }
+func (defaultOsClient) OpenFile(name string, flag int, perm os.FileMode) (*os.File, error) {
+	return os.OpenFile(name, flag, perm)
+}
 func (defaultOsClient) ReadFile(name string) ([]byte, error) {
 	return os.ReadFile(name)
 }
@@ -56,11 +60,9 @@ func (defaultOsClient) RemoveAll(path string) error {
 func (defaultOsClient) Stat(name string) (os.FileInfo, error) {
 	return os.Stat(name)
 }
-
 func (defaultOsClient) TempDir() string {
 	return os.TempDir()
 }
-
 func (defaultOsClient) UserHomeDir() (string, error) {
 	return os.UserHomeDir()
 }
