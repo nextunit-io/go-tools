@@ -5,7 +5,7 @@ go 1.22.0
 require (
 	github.com/aws/aws-sdk-go-v2 v1.32.6
 	github.com/aws/aws-sdk-go-v2/config v1.28.6
-	github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241230125031-940b1c0468fb
+	github.com/nextunit-io/go-tools/toolsmock v0.0.0-20241230125658-95ca3130a9de
 	github.com/stretchr/testify v1.9.0
 )
 
