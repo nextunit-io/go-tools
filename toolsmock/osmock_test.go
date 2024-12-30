@@ -113,6 +113,43 @@ func TestOsMockMkdir(t *testing.T) {
 	})
 }
 
+func TestOsMockOpenFile(t *testing.T) {
+	t.Helper()
+	osMock := toolsmock.GetOsMock()
+
+	t.Run("Testing OpenFile", func(t *testing.T) {
+		var openFileReturn *os.File = &os.File{}
+
+		osMock.Mock.OpenFile.AddReturnValue(&openFileReturn)
+		osMock.Mock.OpenFile.AddReturnValue(&openFileReturn)
+		osMock.Mock.OpenFile.AddReturnValue(&openFileReturn)
+
+		for i := 0; i < 3; i++ {
+			file, err := osMock.OpenFile(fmt.Sprintf("test-name-%d", i), os.O_RDONLY, 0644)
+			assert.Equal(t, openFileReturn, file)
+			assert.Nil(t, err)
+		}
+
+		file, err := osMock.OpenFile("test-input-error", os.O_RDONLY, 0644)
+		assert.Nil(t, file)
+		assert.Equal(t, fmt.Errorf("OpenFile general error"), err)
+
+		assert.Equal(t, 4, osMock.Mock.OpenFile.HasBeenCalled())
+
+		for i := 0; i < 3; i++ {
+			input := osMock.Mock.OpenFile.GetInput(i)
+			assert.Equal(t, fmt.Sprintf("test-name-%d", i), input.Name)
+			assert.Equal(t, os.O_RDONLY, input.Flag)
+			assert.Equal(t, os.FileMode(0644), input.Perm)
+		}
+
+		input := osMock.Mock.OpenFile.GetInput(3)
+		assert.Equal(t, "test-input-error", input.Name)
+		assert.Equal(t, os.O_RDONLY, input.Flag)
+		assert.Equal(t, os.FileMode(0644), input.Perm)
+	})
+}
+
 func TestOsMockReadFile(t *testing.T) {
 	t.Helper()
 	osMock := toolsmock.GetOsMock()
