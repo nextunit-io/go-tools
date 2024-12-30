@@ -6,6 +6,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/nextunit-io/go-tools/interfaces"
 	"github.com/nextunit-io/go-tools/toolsmock"
 	"github.com/stretchr/testify/assert"
 )
@@ -117,7 +118,7 @@ func TestOsMockOpen(t *testing.T) {
 	osMock := toolsmock.GetOsMock()
 
 	t.Run("Testing Open", func(t *testing.T) {
-		var openReturn *os.File = &os.File{}
+		var openReturn interfaces.OsFileInterface = toolsmock.GetFileMock()
 
 		osMock.Mock.Open.AddReturnValue(&openReturn)
 		osMock.Mock.Open.AddReturnValue(&openReturn)
@@ -150,7 +151,7 @@ func TestOsMockOpenFile(t *testing.T) {
 	osMock := toolsmock.GetOsMock()
 
 	t.Run("Testing OpenFile", func(t *testing.T) {
-		var openFileReturn *os.File = &os.File{}
+		var openFileReturn interfaces.OsFileInterface = toolsmock.GetFileMock()
 
 		osMock.Mock.OpenFile.AddReturnValue(&openFileReturn)
 		osMock.Mock.OpenFile.AddReturnValue(&openFileReturn)

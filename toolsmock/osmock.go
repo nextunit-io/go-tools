@@ -5,6 +5,7 @@ import (
 	"os"
 
 	gomock "github.com/nextunit-io/go-mock"
+	"github.com/nextunit-io/go-tools/interfaces"
 )
 
 type osMockStruct struct {
@@ -35,7 +36,7 @@ type osMockStruct struct {
 			Flag int
 			Perm os.FileMode
 		},
-		*os.File,
+		interfaces.OsFileInterface,
 	]
 	ReadFile *gomock.ToolMock[
 		struct {
@@ -73,7 +74,7 @@ type osMockStruct struct {
 		struct {
 			Name string
 		},
-		*os.File,
+		interfaces.OsFileInterface,
 	]
 }
 
@@ -109,7 +110,7 @@ func GetOsMock() *OsMock {
 				struct {
 					Name string
 				},
-				*os.File,
+				interfaces.OsFileInterface,
 			](fmt.Errorf("Open general error")),
 			OpenFile: gomock.GetMock[
 				struct {
@@ -117,7 +118,7 @@ func GetOsMock() *OsMock {
 					Flag int
 					Perm os.FileMode
 				},
-				*os.File,
+				interfaces.OsFileInterface,
 			](fmt.Errorf("OpenFile general error")),
 			ReadFile: gomock.GetMock[
 				struct {
@@ -212,7 +213,7 @@ func (osMock *OsMock) Mkdir(name string, perm os.FileMode) error {
 	return nil
 }
 
-func (osMock *OsMock) OpenFile(name string, flag int, perm os.FileMode) (*os.File, error) {
+func (osMock *OsMock) OpenFile(name string, flag int, perm os.FileMode) (interfaces.OsFileInterface, error) {
 	osMock.Mock.OpenFile.AddInput(struct {
 		Name string
 		Flag int
@@ -319,7 +320,7 @@ func (osMock *OsMock) UserHomeDir() (string, error) {
 	return *result, nil
 }
 
-func (osMock *OsMock) Open(name string) (*os.File, error) {
+func (osMock *OsMock) Open(name string) (interfaces.OsFileInterface, error) {
 	osMock.Mock.Open.AddInput(struct {
 		Name string
 	}{
