@@ -9,6 +9,12 @@ import (
 )
 
 type osMockStruct struct {
+	Create *gomock.ToolMock[
+		struct {
+			Name string
+		},
+		interfaces.OsFileInterface,
+	]
 	MkdirAll *gomock.ToolMock[
 		struct {
 			Path string
@@ -85,6 +91,12 @@ type OsMock struct {
 func GetOsMock() *OsMock {
 	return &OsMock{
 		Mock: osMockStruct{
+			Create: gomock.GetMock[
+				struct {
+					Name string
+				},
+				interfaces.OsFileInterface,
+			](fmt.Errorf("Create general error")),
 			MkdirAll: gomock.GetMock[
 				struct {
 					Path string
@@ -154,6 +166,21 @@ func GetOsMock() *OsMock {
 			](fmt.Errorf("UserHomeDir general error")),
 		},
 	}
+}
+
+func (osMock *OsMock) Create(name string) (interfaces.OsFileInterface, error) {
+	osMock.Mock.Create.AddInput(struct {
+		Name string
+	}{
+		name,
+	})
+
+	result, err := osMock.Mock.Create.GetNextResult()
+	if err != nil {
+		return nil, err
+	}
+
+	return *result, nil
 }
 
 func (osMock *OsMock) MkdirAll(path string, perm os.FileMode) error {

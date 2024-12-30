@@ -11,6 +11,39 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestOsMockCreate(t *testing.T) {
+	t.Helper()
+	osMock := toolsmock.GetOsMock()
+
+	t.Run("Testing Create", func(t *testing.T) {
+		var createReturn interfaces.OsFileInterface = toolsmock.GetFileMock()
+
+		osMock.Mock.Create.AddReturnValue(&createReturn)
+		osMock.Mock.Create.AddReturnValue(&createReturn)
+		osMock.Mock.Create.AddReturnValue(&createReturn)
+
+		for i := 0; i < 3; i++ {
+			file, err := osMock.Create(fmt.Sprintf("test-name-%d", i))
+			assert.Equal(t, createReturn, file)
+			assert.Nil(t, err)
+		}
+
+		file, err := osMock.Create("test-input-error")
+		assert.Nil(t, file)
+		assert.Equal(t, fmt.Errorf("Create general error"), err)
+
+		assert.Equal(t, 4, osMock.Mock.Create.HasBeenCalled())
+
+		for i := 0; i < 3; i++ {
+			input := osMock.Mock.Create.GetInput(i)
+			assert.Equal(t, fmt.Sprintf("test-name-%d", i), input.Name)
+		}
+
+		input := osMock.Mock.Create.GetInput(3)
+		assert.Equal(t, "test-input-error", input.Name)
+	})
+}
+
 func TestOsMockMkdirAll(t *testing.T) {
 	t.Helper()
 	osMock := toolsmock.GetOsMock()
