@@ -44,6 +44,12 @@ type osMockStruct struct {
 		},
 		interfaces.OsFileInterface,
 	]
+	ReadDir *gomock.ToolMock[
+		struct {
+			Name string
+		},
+		[]os.DirEntry,
+	]
 	ReadFile *gomock.ToolMock[
 		struct {
 			Name string
@@ -132,6 +138,12 @@ func GetOsMock() *OsMock {
 				},
 				interfaces.OsFileInterface,
 			](fmt.Errorf("OpenFile general error")),
+			ReadDir: gomock.GetMock[
+				struct {
+					Name string
+				},
+				[]os.DirEntry,
+			](fmt.Errorf("ReadDir general error")),
 			ReadFile: gomock.GetMock[
 				struct {
 					Name string
@@ -252,6 +264,21 @@ func (osMock *OsMock) OpenFile(name string, flag int, perm os.FileMode) (interfa
 	})
 
 	result, err := osMock.Mock.OpenFile.GetNextResult()
+	if err != nil {
+		return nil, err
+	}
+
+	return *result, nil
+}
+
+func (osMock *OsMock) ReadDir(name string) ([]os.DirEntry, error) {
+	osMock.Mock.ReadDir.AddInput(struct {
+		Name string
+	}{
+		Name: name,
+	})
+
+	result, err := osMock.Mock.ReadDir.GetNextResult()
 	if err != nil {
 		return nil, err
 	}

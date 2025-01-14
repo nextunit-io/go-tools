@@ -13,6 +13,7 @@ type OsInterface interface {
 	Mkdir(name string, perm os.FileMode) error
 	Open(name string) (interfaces.OsFileInterface, error)
 	OpenFile(name string, flag int, perm os.FileMode) (interfaces.OsFileInterface, error)
+	ReadDir(name string) ([]os.DirEntry, error)
 	ReadFile(name string) ([]byte, error)
 	Remove(name string) error
 	RemoveAll(path string) error
@@ -59,6 +60,9 @@ func (defaultOsClient) OpenFile(name string, flag int, perm os.FileMode) (interf
 }
 func (defaultOsClient) ReadFile(name string) ([]byte, error) {
 	return os.ReadFile(name)
+}
+func (defaultOsClient) ReadDir(name string) ([]os.DirEntry, error) {
+	return os.ReadDir(name)
 }
 func (defaultOsClient) Remove(name string) error {
 	return os.Remove(name)

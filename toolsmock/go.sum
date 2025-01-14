@@ -1,11 +1,5 @@
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/nextunit-io/go-mock v0.0.0-20240730143511-1fd4c363446a h1:UKzg1U+oAYQkDm4P6izN4WI5AdsTXM8BuvYasGBwq+Q=
-github.com/nextunit-io/go-mock v0.0.0-20240730143511-1fd4c363446a/go.mod h1:kecyE7VJ/Cou30y3bWP0trAEXYJ+5hUun/5/2NUue0E=
-github.com/nextunit-io/go-mock v0.0.0-20240731050352-a1c9576fe371 h1:WdTbSEtjeHyGLJ51akBkloeWRQWhWsCMzOjwGJNINH0=
-github.com/nextunit-io/go-mock v0.0.0-20240731050352-a1c9576fe371/go.mod h1:kecyE7VJ/Cou30y3bWP0trAEXYJ+5hUun/5/2NUue0E=
-github.com/nextunit-io/go-mock v0.0.0-20240731051644-97d255a9a00e h1:RZqfMCM/VsDUwty/GShYVWLp1kWpBUki/WPfF6Y2z9o=
-github.com/nextunit-io/go-mock v0.0.0-20240731051644-97d255a9a00e/go.mod h1:kecyE7VJ/Cou30y3bWP0trAEXYJ+5hUun/5/2NUue0E=
 github.com/nextunit-io/go-mock v0.0.0-20240911152234-c0b0103a4eca h1:ePf7TQDoy4XvByRK1btYMCmXNEdN+WMZufJrRB5vkbg=
 github.com/nextunit-io/go-mock v0.0.0-20240911152234-c0b0103a4eca/go.mod h1:kecyE7VJ/Cou30y3bWP0trAEXYJ+5hUun/5/2NUue0E=
 github.com/nextunit-io/go-tools/interfaces v0.0.0-20241230144513-b630161546af h1:GFk5dNx0NyXon2aXPOMIgWqfMRAc/zfnQz8pvaAJVKE=
