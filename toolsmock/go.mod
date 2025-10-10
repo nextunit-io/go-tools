@@ -4,7 +4,7 @@ go 1.23.3
 
 require (
 	github.com/nextunit-io/go-mock v0.0.0-20240911152234-c0b0103a4eca
-	github.com/nextunit-io/go-tools/interfaces v0.0.0-20241230144513-b630161546af
+	github.com/nextunit-io/go-tools/interfaces v0.0.0-20250114063450-4203a4bf3d20
 	github.com/stretchr/testify v1.9.0
 )
 

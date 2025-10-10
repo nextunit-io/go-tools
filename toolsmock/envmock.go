@@ -25,7 +25,7 @@ func GetEnvMock() *EnvMock {
 				Key string
 			},
 				string,
-			](fmt.Errorf("PutEvents general error")),
+			](fmt.Errorf("Getenv general error")),
 		},
 	}
 }
