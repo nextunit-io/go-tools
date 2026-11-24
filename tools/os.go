@@ -8,6 +8,8 @@ import (
 
 type OsInterface interface {
 	Create(name string) (interfaces.OsFileInterface, error)
+	CreateTemp(dir, pattern string) (interfaces.OsFileInterface, error)
+	Link(oldname, newname string) error
 	MkdirAll(path string, perm os.FileMode) error
 	MkdirTemp(dir, pattern string) (string, error)
 	Mkdir(name string, perm os.FileMode) error
@@ -17,6 +19,7 @@ type OsInterface interface {
 	ReadFile(name string) ([]byte, error)
 	Remove(name string) error
 	RemoveAll(path string) error
+	Rename(oldpath, newpath string) error
 	Stat(name string) (os.FileInfo, error)
 	TempDir() string
 	UserHomeDir() (string, error)
@@ -42,6 +45,12 @@ func SetOsInstance(client OsInterface) {
 
 func (defaultOsClient) Create(name string) (interfaces.OsFileInterface, error) {
 	return os.Create(name)
+}
+func (defaultOsClient) CreateTemp(dir, pattern string) (interfaces.OsFileInterface, error) {
+	return os.CreateTemp(dir, pattern)
+}
+func (defaultOsClient) Link(oldname, newname string) error {
+	return os.Link(oldname, newname)
 }
 func (defaultOsClient) MkdirAll(path string, perm os.FileMode) error {
 	return os.MkdirAll(path, perm)
@@ -69,6 +78,9 @@ func (defaultOsClient) Remove(name string) error {
 }
 func (defaultOsClient) RemoveAll(path string) error {
 	return os.RemoveAll(path)
+}
+func (defaultOsClient) Rename(oldpath, newpath string) error {
+	return os.Rename(oldpath, newpath)
 }
 func (defaultOsClient) Stat(name string) (os.FileInfo, error) {
 	return os.Stat(name)
