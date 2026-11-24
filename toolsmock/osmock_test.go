@@ -44,6 +44,83 @@ func TestOsMockCreate(t *testing.T) {
 	})
 }
 
+func TestOsMockCreateTemp(t *testing.T) {
+	t.Helper()
+	osMock := toolsmock.GetOsMock()
+
+	t.Run("Testing CreateTemp", func(t *testing.T) {
+		var createTempReturn interfaces.OsFileInterface = toolsmock.GetFileMock()
+
+		osMock.Mock.CreateTemp.AddReturnValue(&createTempReturn)
+		osMock.Mock.CreateTemp.AddReturnValue(&createTempReturn)
+		osMock.Mock.CreateTemp.AddReturnValue(&createTempReturn)
+
+		for i := 0; i < 3; i++ {
+			file, err := osMock.CreateTemp(fmt.Sprintf("test-dir-%d", i), fmt.Sprintf("test-pattern-%d", i))
+			assert.Equal(t, createTempReturn, file)
+			assert.Nil(t, err)
+		}
+
+		file, err := osMock.CreateTemp("test-input-error", "test-pattern-error")
+		assert.Nil(t, file)
+		assert.Equal(t, fmt.Errorf("CreateTemp general error"), err)
+
+		assert.Equal(t, 4, osMock.Mock.CreateTemp.HasBeenCalled())
+
+		for i := 0; i < 3; i++ {
+			input := osMock.Mock.CreateTemp.GetInput(i)
+			assert.Equal(t, fmt.Sprintf("test-dir-%d", i), input.Dir)
+			assert.Equal(t, fmt.Sprintf("test-pattern-%d", i), input.Pattern)
+		}
+
+		input := osMock.Mock.CreateTemp.GetInput(3)
+		assert.Equal(t, "test-input-error", input.Dir)
+		assert.Equal(t, "test-pattern-error", input.Pattern)
+	})
+}
+
+func TestOsMockLink(t *testing.T) {
+	t.Helper()
+	osMock := toolsmock.GetOsMock()
+
+	t.Run("Testing Link", func(t *testing.T) {
+		linkErrorReturn := false
+		linkErrorRequested := true
+
+		osMock.Mock.Link.AddReturnValue(&linkErrorReturn)
+		osMock.Mock.Link.AddReturnValue(&linkErrorReturn)
+		osMock.Mock.Link.AddReturnValue(&linkErrorReturn)
+		osMock.Mock.Link.AddReturnValue(&linkErrorRequested)
+
+		for i := 0; i < 3; i++ {
+			err := osMock.Link(fmt.Sprintf("test-old-%d", i), fmt.Sprintf("test-new-%d", i))
+			assert.Nil(t, err)
+		}
+
+		err := osMock.Link("test-old-requested", "test-new-requested")
+		assert.Equal(t, fmt.Errorf("Error requested"), err)
+
+		err = osMock.Link("test-old-error", "test-new-error")
+		assert.Equal(t, fmt.Errorf("Link general error"), err)
+
+		assert.Equal(t, 5, osMock.Mock.Link.HasBeenCalled())
+
+		for i := 0; i < 3; i++ {
+			input := osMock.Mock.Link.GetInput(i)
+			assert.Equal(t, fmt.Sprintf("test-old-%d", i), input.Oldname)
+			assert.Equal(t, fmt.Sprintf("test-new-%d", i), input.Newname)
+		}
+
+		input := osMock.Mock.Link.GetInput(3)
+		assert.Equal(t, "test-old-requested", input.Oldname)
+		assert.Equal(t, "test-new-requested", input.Newname)
+
+		input = osMock.Mock.Link.GetInput(4)
+		assert.Equal(t, "test-old-error", input.Oldname)
+		assert.Equal(t, "test-new-error", input.Newname)
+	})
+}
+
 func TestOsMockMkdirAll(t *testing.T) {
 	t.Helper()
 	osMock := toolsmock.GetOsMock()
@@ -307,6 +384,48 @@ func TestOsMockRemoveAll(t *testing.T) {
 
 		input := osMock.Mock.RemoveAll.GetInput(3)
 		assert.Equal(t, "test-input-error", input.Path)
+	})
+}
+
+func TestOsMockRename(t *testing.T) {
+	t.Helper()
+	osMock := toolsmock.GetOsMock()
+
+	t.Run("Testing Rename", func(t *testing.T) {
+		renameErrorReturn := false
+		renameErrorRequested := true
+
+		osMock.Mock.Rename.AddReturnValue(&renameErrorReturn)
+		osMock.Mock.Rename.AddReturnValue(&renameErrorReturn)
+		osMock.Mock.Rename.AddReturnValue(&renameErrorReturn)
+		osMock.Mock.Rename.AddReturnValue(&renameErrorRequested)
+
+		for i := 0; i < 3; i++ {
+			err := osMock.Rename(fmt.Sprintf("test-old-%d", i), fmt.Sprintf("test-new-%d", i))
+			assert.Nil(t, err)
+		}
+
+		err := osMock.Rename("test-old-requested", "test-new-requested")
+		assert.Equal(t, fmt.Errorf("Error requested"), err)
+
+		err = osMock.Rename("test-old-error", "test-new-error")
+		assert.Equal(t, fmt.Errorf("Rename general error"), err)
+
+		assert.Equal(t, 5, osMock.Mock.Rename.HasBeenCalled())
+
+		for i := 0; i < 3; i++ {
+			input := osMock.Mock.Rename.GetInput(i)
+			assert.Equal(t, fmt.Sprintf("test-old-%d", i), input.Oldpath)
+			assert.Equal(t, fmt.Sprintf("test-new-%d", i), input.Newpath)
+		}
+
+		input := osMock.Mock.Rename.GetInput(3)
+		assert.Equal(t, "test-old-requested", input.Oldpath)
+		assert.Equal(t, "test-new-requested", input.Newpath)
+
+		input = osMock.Mock.Rename.GetInput(4)
+		assert.Equal(t, "test-old-error", input.Oldpath)
+		assert.Equal(t, "test-new-error", input.Newpath)
 	})
 }
 

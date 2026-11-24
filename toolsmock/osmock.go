@@ -15,6 +15,20 @@ type osMockStruct struct {
 		},
 		interfaces.OsFileInterface,
 	]
+	CreateTemp *gomock.ToolMock[
+		struct {
+			Dir     string
+			Pattern string
+		},
+		interfaces.OsFileInterface,
+	]
+	Link *gomock.ToolMock[
+		struct {
+			Oldname string
+			Newname string
+		},
+		bool,
+	]
 	MkdirAll *gomock.ToolMock[
 		struct {
 			Path string
@@ -68,6 +82,13 @@ type osMockStruct struct {
 		},
 		bool,
 	]
+	Rename *gomock.ToolMock[
+		struct {
+			Oldpath string
+			Newpath string
+		},
+		bool,
+	]
 	Stat *gomock.ToolMock[
 		struct {
 			Name string
@@ -103,6 +124,20 @@ func GetOsMock() *OsMock {
 				},
 				interfaces.OsFileInterface,
 			](fmt.Errorf("Create general error")),
+			CreateTemp: gomock.GetMock[
+				struct {
+					Dir     string
+					Pattern string
+				},
+				interfaces.OsFileInterface,
+			](fmt.Errorf("CreateTemp general error")),
+			Link: gomock.GetMock[
+				struct {
+					Oldname string
+					Newname string
+				},
+				bool,
+			](fmt.Errorf("Link general error")),
 			MkdirAll: gomock.GetMock[
 				struct {
 					Path string
@@ -162,6 +197,13 @@ func GetOsMock() *OsMock {
 				},
 				bool,
 			](fmt.Errorf("RemoveAll general error")),
+			Rename: gomock.GetMock[
+				struct {
+					Oldpath string
+					Newpath string
+				},
+				bool,
+			](fmt.Errorf("Rename general error")),
 			Stat: gomock.GetMock[
 				struct {
 					Name string
@@ -193,6 +235,43 @@ func (osMock *OsMock) Create(name string) (interfaces.OsFileInterface, error) {
 	}
 
 	return *result, nil
+}
+
+func (osMock *OsMock) CreateTemp(dir, pattern string) (interfaces.OsFileInterface, error) {
+	osMock.Mock.CreateTemp.AddInput(struct {
+		Dir     string
+		Pattern string
+	}{
+		Dir:     dir,
+		Pattern: pattern,
+	})
+
+	result, err := osMock.Mock.CreateTemp.GetNextResult()
+	if err != nil {
+		return nil, err
+	}
+
+	return *result, nil
+}
+
+func (osMock *OsMock) Link(oldname, newname string) error {
+	osMock.Mock.Link.AddInput(struct {
+		Oldname string
+		Newname string
+	}{
+		Oldname: oldname,
+		Newname: newname,
+	})
+
+	result, err := osMock.Mock.Link.GetNextResult()
+	if err != nil {
+		return err
+	}
+	if *result {
+		return fmt.Errorf("Error requested")
+	}
+
+	return nil
 }
 
 func (osMock *OsMock) MkdirAll(path string, perm os.FileMode) error {
@@ -327,6 +406,26 @@ func (osMock *OsMock) RemoveAll(path string) error {
 	})
 
 	result, err := osMock.Mock.RemoveAll.GetNextResult()
+	if err != nil {
+		return err
+	}
+	if *result {
+		return fmt.Errorf("Error requested")
+	}
+
+	return nil
+}
+
+func (osMock *OsMock) Rename(oldpath, newpath string) error {
+	osMock.Mock.Rename.AddInput(struct {
+		Oldpath string
+		Newpath string
+	}{
+		Oldpath: oldpath,
+		Newpath: newpath,
+	})
+
+	result, err := osMock.Mock.Rename.GetNextResult()
 	if err != nil {
 		return err
 	}
